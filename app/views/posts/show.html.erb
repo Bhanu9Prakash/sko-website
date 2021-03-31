@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<div class = "container"> 
+  <p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @post.content %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @post.user_id %>
+</p>
+
+<hr />
+
+<h4>Comments</h4>
+
+<% if user_signed_in? %>
+  <%= render partial: "comments/form", locals: { comment: Comment.new, commentable: @post } %>
+<% else %>
+  <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "login", new_user_session_path %> to comment
+<% end %>
+<%= turbo_stream_from @post, :comments %>
+<%= tag.div id: "#{dom_id(@post)}_comments" do %>
+  <%= render partial: "comments/comment_with_replies", collection: @post.comments.where(parent_id: nil), as: :comment %>
+<% end %>
+<hr />
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
+
+
+</div>
