@@ -1,0 +1,90 @@
+<br/>
+<br/>
+<br/>
+<br/>
+
+<div class = "container">
+<div class="form">
+  
+  <%= search_form_for @q do |f| %>
+    <%= f.label :name_or_email_cont %>  
+    <%= f.search_field :name_or_email_cont, placeholder: 'name or email' %>
+    <%= f.submit %>
+    <%= link_to 'refresh', users_path %>
+  <% end %>
+</div>
+
+<br>
+<br>
+
+<table class="table table-bordered ">
+  <thead>
+    <tr>
+      <th><%= sort_link(@q, :name) %></th>
+      <th>
+        <%= sort_link(@q, :email) %>
+      </th>
+      <th>created_at</th>
+      <th>
+        <%= 'sign_in_count'.humanize %>
+      </th>
+      <th>
+        <%= 'current_sign_in_at'.humanize %>
+      </th>
+      <th>
+        <%= 'last_sign_in_at'.humanize %>
+      </th>
+      <th>
+        <%= 'current_sign_in_ip'.humanize %>
+      </th>
+      <th>
+        <%= 'last_sign_in_ip'.humanize %>
+      </th>
+      <th>
+        <%= 'role'.humanize %>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td>
+          <%= user.name %>
+        </td>
+        <td>
+          <%= user.email %>
+        </td>
+        <td>
+          <%= user.created_at %>
+        </td>
+        <td>
+          <%= user.sign_in_count %>
+        </td>
+        <td>
+          <%= user.current_sign_in_at %>
+        </td>
+        <td>
+          <%= user.last_sign_in_at %>
+        </td>
+        <td>
+          <%= user.current_sign_in_ip %>
+        </td>
+        <td>
+          <%= user.last_sign_in_ip %>
+        </td>
+        <td>
+          <% user.roles.each do |role| %>
+            <div class="badge badge-info">
+              <%= role.name %>
+            </div>
+          <% end %>
+          <% if policy(user).edit? %>
+            <%= link_to 'Edit roles', edit_user_path(user), class: 'btn btn-sm btn-warning' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div>

@@ -1,0 +1,48 @@
+<br/>
+<br/>
+
+<% if notice %>
+      <%= render 'layouts/alerts' %>
+<% end %>
+
+<br/>
+<br/>
+
+<div class = "container">
+  <div class = "card">
+    <div class = "card-body">
+      <h2 class = "content-heading">
+        <%= @discussion.title %>
+      </h2>
+      
+      <p class = "content-text">
+        <%= @discussion.description %>
+      </p>
+      
+      <hr />
+      
+      <h4>Thread</h4>
+      
+      <% if user_signed_in? %>
+        <%= render partial: "comments/form", locals: { comment: Comment.new, commentable: @discussion } %>
+      <% else %>
+        <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "login", new_user_session_path %> to comment
+      <% end %>
+      <%= turbo_stream_from @discussion, :comments %>
+      <%= tag.div id: "#{dom_id(@discussion)}_comments" do %>
+        <%= render partial: "comments/comment_with_replies", collection: @discussion.comments.where(parent_id: nil), as: :comment %>
+      <% end %>
+      <hr />
+      
+      <% if current_user == @discussion.user %>
+        <%= link_to 'Edit', edit_discussion_path(@discussion), class:"btn btn-sm btn-outline-secondary" %> |
+      <% end %>
+      <%= link_to 'Back', discussions_path, class:"btn btn-sm btn-outline-secondary" %>
+  
+    
+    </div>
+  </div>
+  
+</div>
+
+

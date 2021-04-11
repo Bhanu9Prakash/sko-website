@@ -1,0 +1,116 @@
+<br/>
+<br/>
+
+<% if notice %>
+      <%= render 'layouts/alerts' %>
+<% end %>
+
+<br/>
+<br/>
+
+<div class = "container">
+
+  <div class = "row">
+    <div class = "col-md-6">
+      <p>
+        <strong>Name:</strong>
+        <%= @kid.name %>
+      </p>
+      
+      <p>
+        <strong>Age:</strong>
+        <%= @kid.age %>
+      </p>
+      <p>
+        <strong>House:</strong>
+        <%= link_to house_path(@kid.house) do %>
+        <%= @kid.house.house_number %>
+        <% end %>
+      </p>
+      
+      <p>
+        <strong>Current standard:</strong>
+        <%= @kid.current_standard %>
+      </p>
+      
+      <p>
+        <strong>School:</strong>
+        <%= @kid.school %>
+      </p>
+      
+      <p>
+        <strong>Medium:</strong>
+        <%= @kid.medium %>
+      </p>
+      
+      <p>
+        <strong>Home address:</strong>
+        <%= @kid.home_address %>
+      </p>
+      
+      <p>
+        <strong>Mobile:</strong>
+        <%= @kid.mobile %>
+      </p>
+      
+      <p>
+        <strong>Caste:</strong>
+        <%= @kid.caste %>
+      </p>
+
+    </div>
+    <div class = "col-md-6">
+      <p>
+        <strong>Father name:</strong>
+        <%= @kid.father_name %>
+      </p>
+      
+      <p>
+        <strong>Father occupation:</strong>
+        <%= @kid.father_occupation %>
+      </p>
+      
+      <p>
+        <strong>Mother name:</strong>
+        <%= @kid.mother_name %>
+      </p>
+      
+      <p>
+        <strong>Mother occupation:</strong>
+        <%= @kid.mother_occupation %>
+      </p>
+      
+      <p>
+        <strong>Annual income:</strong>
+        <%= @kid.annual_income %>
+      </p>
+      
+      <p>
+        <strong>Extra curriculars:</strong>
+        <%= @kid.extra_curriculars %>
+      </p>
+      
+      <p>
+        <strong>Personality trait:</strong>
+        <%= @kid.personality_trait %>
+      </p>
+      
+      <p>
+        <strong>Remarks:</strong>
+        <%= @kid.remarks %>
+      </p>
+
+    </div>
+  </div>  
+
+
+<p>
+  <strong>Additional info:</strong>
+  <%= @kid.additional_info %>
+</p>
+
+
+<%= link_to 'Edit', edit_kid_path(@kid), class: "btn btn-sm btn-outline-secondary" %> |
+<%= link_to 'Back', kids_path, class: "btn btn-sm btn-outline-secondary" %>
+
+</div>

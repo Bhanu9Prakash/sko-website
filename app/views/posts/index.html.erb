@@ -1,31 +1,54 @@
-<p id="notice"><%= notice %></p>
+<br/>
+<br/>
 
-<h1>Posts</h1>
+<% if notice %>
+      <%= render 'layouts/alerts' %>
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<br/>
+<br/>
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= post.content %></td>
-        <td><%= post.user_id %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+
+
+<div class = "container">
+<% if @posts.exists? %>
+<div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+    <div class="col px-0">
+      <h1 class="display-4 fst-italic"><%= @posts[0].title %></h1>
+      <p class="lead my-3"><%= @posts[0].short_description %></p>
+      <p class="lead mb-0"><%= link_to 'Read More ->', @posts[0], class: "text-white fw-bold"  %></p>
+    </div>
+  </div>
+<% end %>
+<% @posts.each_slice(3) do |posts1| %>
+  <div class="row mb-2 justify-content-around">
+    <% posts1.each do |post| %>
+      <div class="col-md-4">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <div class="text-muted"><%= post.user.name %></div>
+          <h5 class="mb-0"><%= post.title %></h5>
+          <p class="mb-auto"><%= post.short_description %></p>
+          <div class = "row">
+            <div class = "col"><%= link_to "Read More ->", post, class: "stretched-link" %></div>
+          </div>
+          <div class = "row">
+            <div class=" col "><%= post.created_at.strftime("%b %e") %></div>
+            <div class=" col "><%= post.likes.count %> <i class="far fa-heart"></i></div>
+            <% if current_user == post.user %>
+            <div class=" col "><%= link_to 'Edit', edit_post_path(post), class: "btn btn-sm btn-outline-secondary" %> </div>
+            <div class=" col"><%= link_to 'Destroy', post, class: "btn btn-sm btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
+<% end %>
 
 <br>
-
-<%= link_to 'New Post', new_post_path %>
+<% if current_user %>
+  <%= link_to 'New Post', new_post_path, class: "btn btn-outline-dark" %>
+<% end %>
+</div>

@@ -1,29 +1,33 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_project, only: %i[ show edit update destroy ]
-
   # GET /projects or /projects.json
   def index
     @projects = Project.all
+    authorize @projects
   end
 
   # GET /projects/1 or /projects/1.json
   def show
+    authorize @project
   end
 
   # GET /projects/new
   def new
-    @project = Project.new
+    @project = current_user.projects.build
     @project.tasks.new
+    authorize @project
   end
 
   # GET /projects/1/edit
   def edit
+    authorize @project
   end
 
   # POST /projects or /projects.json
   def create
-    @project = Project.new(project_params)
-
+    @project = current_user.projects.build(project_params)
+    authorize @project
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: "Project was successfully created." }
@@ -37,6 +41,7 @@ class ProjectsController < ApplicationController
 
   # PATCH/PUT /projects/1 or /projects/1.json
   def update
+    authorize @project
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: "Project was successfully updated." }
@@ -50,6 +55,7 @@ class ProjectsController < ApplicationController
 
   # DELETE /projects/1 or /projects/1.json
   def destroy
+    authorize @project
     @project.destroy
     respond_to do |format|
       format.html { redirect_to projects_url, notice: "Project was successfully destroyed." }
@@ -65,6 +71,6 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:name, :description, tasks_attributes: [:id, :description, :_destroy])
+      params.require(:project).permit(:name, :description, tasks_attributes: [:id, :description, :status, :_destroy])
     end
 end

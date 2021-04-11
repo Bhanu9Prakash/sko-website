@@ -67,4 +67,23 @@ gem 'devise'
 #install aws s3 for storage
 gem "aws-sdk-s3", require: false
 
+
+#install hotwire for reactive application
 gem "hotwire-rails", "~> 0.1.3"
+
+
+
+#install image processing to transform images
+gem 'image_processing'
+
+
+#install ransack for search functionality
+gem 'ransack'
+
+#install rolify and pundit 
+gem "rolify"
+gem "pundit"
+
+#social media buttons
+gem 'shareable'
+

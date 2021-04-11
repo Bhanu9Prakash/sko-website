@@ -1,5 +1,11 @@
 <%= content_tag :div, class: "nested-fields", data: { new_record: form.object.new_record? } do %>
   <div class="form-inputs">
+    <%= form.input :status, 
+          input_html: {  }, 
+          prompt: "-- SELECT ONE --", 
+          collection: Task::STATUS_OPTIONS, 
+          label: "Status", 
+          required: true %>
     <%= form.input :description %>
   <small><%= link_to "Remove", "#", data: { action: "click->nested-form#remove_association" } %></small>
   </div>

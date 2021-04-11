@@ -1,0 +1,49 @@
+
+<%= simple_form_for(@house) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :house_number %>
+    <%= f.input :head %>
+    <%= f.input :contact_number %>
+    <%= f.input :source_of_income %>
+    <%= f.input :number_of_people_employed %>
+    <%= f.input :living_since %>
+    <%= f.input :average_income %>
+    <%= f.input :documents, as: :rich_text_area %>
+  </div>
+  
+  
+  <h4>Members</h4>
+      
+  
+  <div data-controller= "nested-form">
+    
+      <template data-target = "nested-form.template">
+        
+          <%= f.fields_for :members, Member.new, child_index: "NEW_RECORD" do |member| %>
+            <%= render 'member_fields', form: member %>
+          <% end %>
+      </template>
+     
+      <%= f.fields_for :members do |member| %>
+          <%= render 'member_fields', form: member %>
+      <% end %>
+        
+    
+    
+    
+    <div class = "mb-3" data-target = "nested-form.links">
+      <%= link_to "Add Member", "#", class: "btn btn-outline-dark", data: {action: "click->nested-form#add_association"} %>
+    </div>
+  </div>
+    
+  
+  
+  
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-dark" %>
+  </div>
+  <br/>
+<% end %>

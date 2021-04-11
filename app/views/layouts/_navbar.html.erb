@@ -1,37 +1,104 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/">
-    Shiksha Ki Ore
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <%= link_to root_path, class: "nav-link #{'active font-weight-bold' if current_page?(root_path)}" do %>
-        Home
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark <%= current_page?(root_path) ? 'home' : 'bg-dark'  %>">
+  <div class = "container">
+    
+    <% if current_user %>
+      <%= link_to root_path , class: "navbar-brand" do %>
+        SHIKSHA KI ORE
       <% end %>
-    </ul>
-    <ul class="navbar-nav mr-right">
-      <% if current_user %>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <div class="fa fa-user"></div>
-            <b><%= current_user.email %></b>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <%= link_to edit_user_registration_path, class: "dropdown-item #{'active font-weight-bold' if current_page?(edit_user_registration_path)}" do %>
-              <div class="fa fa-cog"></div>
-              <b>Account settings</b>
-            <% end %>
-            <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
-              <div class="fa fa-sign-out-alt"></div>
-              <b>Sign out</b>
-            <% end %>
-          </div>
-        </li>
-      <% else %>
-        <%= link_to "Log in", new_user_session_path, class: "nav-link #{'active font-weight-bold' if current_page?(new_user_session_path)}" %>
+    <% else %>
+      <%= link_to new_user_session_path , class: "navbar-brand" do %>
+        SHIKSHA KI ORE
       <% end %>
-    </ul>
+    <% end %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        
+        
+      </ul>
+      <ul class="navbar-nav mr-right">
+        <%= link_to root_path, class: "nav-link #{'active' if current_page?(root_path)}" do %>
+          <span>HOME</span>
+        <% end %>
+        <%= link_to home_about_path, class: "nav-link #{'active' if current_page?(home_about_path)}" do %>
+          <span>ABOUT</span>
+        <% end %>
+        <%= link_to albums_path, class: "nav-link #{'active' if current_page?(albums_path)}" do %>
+          <span>GALLERY</span>
+        <% end %>
+        <%= link_to posts_path, class: "nav-link #{'active' if current_page?(posts_path)}" do %>
+          <span>BLOG</span>
+        <% end %>
+        <%= link_to "https://donorbox.org/sorad", class: "nav-link" do %>
+          <span>DONATE</span>
+        <% end %>
+        <% if current_user %>
+          <% if current_user.has_role?(:admin) %>
+            <li class="<%= 'active' if current_page?(users_path) %> nav-item">
+              <%= link_to users_path, class: 'nav-link' do %>
+                <span>USERS</span>
+              <% end %>
+            </li>
+          <% end %>
+          <% if current_user.has_role?(:project_lead) %>
+            <li class="<%= 'active' if current_page?(projects_path) %> nav-item">
+              <%= link_to projects_path, class: 'nav-link' do %>
+                <span>WORK</span>
+              <% end %>
+            </li>
+          <% end %>
+          <% if current_user.has_role?(:volunteer) %>
+            <li class="<%= 'active' if current_page?(discussions_path) %> nav-item">
+              <%= link_to discussions_path, class: 'nav-link' do %>
+                <span>FORUM</span>
+              <% end %>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span><%= "DATABASE" %></span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%= link_to kids_path, class: "dropdown-item #{'active font-weight-bold' if current_page?(kids_path	)}" do %>
+                  <%= "KIDS" %>  
+                <% end %>
+                <%= link_to houses_path	, class: "dropdown-item #{'active font-weight-bold' if current_page?(houses_path)}" do %>
+                  <%= "HOUSE"  %>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="fa fa-user"></div>
+              <%= current_user.name %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to edit_user_registration_path, class: "dropdown-item #{'active font-weight-bold' if current_page?(edit_user_registration_path)}" do %>
+                <div class="fa fa-cog"></div>
+                ACCOUNT
+              <% end %>
+              <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
+                <div class="fa fa-sign-out-alt"></div>
+                Sign out
+              <% end %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </nav>
+
+<% if current_page?(root_path)%>
+  <header class = "home-page-header">
+  <div class = "center-header">
+    <blockquote class="blockquote text-center">
+      <h1 class="display-1 white">SHIKSHA KI ORE</h1>
+      <p class = "h5 white">A journey towards educating India</p>
+    </blockquote>  
+  </div>
+</header>
+  
+<% end %>

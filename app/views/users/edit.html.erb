@@ -1,0 +1,24 @@
+<br/>
+<br/>
+<br/>
+<br/>
+<div class = "container">
+  <div class="card">
+  <div class="card-header">
+    <strong>Editing roles</strong> for
+    <%= @user.email %>
+  </div>
+  <div class="card-body">
+    <%= simple_form_for @user do |f| %>
+      <%= f.collection_check_boxes :role_ids, Role.all, :id, :name %>
+      <%= f.error :roles, class: 'text-danger' %>
+      <hr/>
+      <%= f.button :submit, class: "btn btn-outline-success" %>
+    <% end %>
+  </div>
+  <div class="card-footer">
+    <%= link_to 'Cancel', users_path, class: 'btn btn-outline-danger' %>
+  </div>
+</div>
+
+</div>

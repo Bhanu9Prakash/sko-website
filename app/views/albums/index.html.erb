@@ -1,0 +1,51 @@
+
+<br/>
+<br/>
+<br/>
+<br/>
+<% if notice %>
+      <%= render 'layouts/alerts' %>
+<% end %>
+
+
+<div class = "container">
+  
+<h1 class = "content-heading" style = "text-align: center;">Gallery</h1>
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        
+            <% @albums.each do |album| %>
+                
+                <div class="col">
+                  <div class="card shadow-sm">
+                    
+                    <div class="card-body">
+                      <p class="card-text" style = "font-size: 1.23rem; font-weight: 400;"><%= album.name %></p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <%= link_to 'View', album, class: "btn btn-sm btn-outline-secondary" %>
+                          <% if current_user == album.user %>
+                            <%= link_to 'Edit', edit_album_path(album), class:"btn btn-sm btn-outline-secondary" %>
+                          <% end %>
+                        </div>
+                        <% if current_user == album.user %>
+                          <%= link_to 'Destroy', album, class: "btn btn-sm btn-outline-danger" ,method: :delete, data: { confirm: 'Are you sure?' } %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+            <% end %>
+        
+
+<br>
+</div>
+<br/>
+<br/>
+<% if current_user %>
+<%= link_to 'New Album', new_album_path, class: "btn btn-outline-dark" %>
+<% end %>
+<br/>
+<br/>
+

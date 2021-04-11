@@ -1,0 +1,40 @@
+<br/>
+<br/>
+<% if notice %>
+      <%= render 'layouts/alerts' %>
+<% end %>
+<br/>
+<br/>
+
+
+<div class = "container">
+  <h1 class = "display-4" style = "text-align: center;">
+    <%= @album.name %>  
+  </h1>
+  
+  <div style = "display: flex;
+  flex-wrap: wrap;padding: 5px;
+     justify-content: space-around;">
+    <% @album.images.each do |image| %>
+        <% if image.representable? %>
+          <%= image_tag image.representation(resize_to_limit: [400, 400]) %>
+        <% else %>
+          <%= link_to rails_blob_path(image, disposition: "attachment") do %>
+            <%= image_tag "placeholder.png", alt: "Download file" %>
+          <% end %>
+        <% end %>
+    <% end %>
+  </div>
+    
+  
+<br/>
+<br/>
+<% if current_user == @album.user %>
+  <%= link_to 'Edit', edit_album_path(@album), class: "btn btn-sm btn-outline-secondary" %> | 
+<% end %>
+<%= link_to 'Back', albums_path, class: "btn btn-sm btn-outline-secondary" %>
+</div>
+
+
+<br/>
+<br/>

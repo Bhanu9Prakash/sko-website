@@ -5,6 +5,13 @@
 
   <div class="form-inputs">
     
+    <%= f.label :avatar %>
+    <div>
+      <%= if user.avatar.attached? %>
+        <%= image_tag @course.avatar, width: "200px" %>
+      <% end %>
+    </div>
+    <%= f.file_field 'Avatar' %>
     
     <%= f.input :name, required: true, autofocus: true,
                 input_html: { autocomplete: "email" } %>
