@@ -1,5 +1,4 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark <%= current_page?(root_path) ? 'home' : 'bg-dark'  %>">
-  <div class = "container">
     
     <% if current_user %>
       <%= link_to root_path , class: "navbar-brand" do %>
@@ -88,7 +87,6 @@
         <% end %>
       </ul>
     </div>
-  </div>
 </nav>
 
 <% if current_page?(root_path)%>

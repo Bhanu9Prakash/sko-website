@@ -22,8 +22,8 @@
 <hr/>
 <p style = "font-size: 1.4rem;">
     <%= @post.likes.count %>
-    
-    <% pre_like = @post.likes.find { |like| like.user_id == current_user.id} %>
+    <% if current_user%>
+      <% pre_like = @post.likes.find { |like| like.user_id == current_user.id} %>
       <% if pre_like %>
       <%= link_to post_like_path(@post, pre_like), method: :delete do %>
         <i class="fas fa-heart"></i> 
@@ -32,6 +32,9 @@
       <%= link_to post_likes_path(@post), method: :post do %>
         <i class="far fa-heart"></i>
       <% end %>
+    <% end %>
+    <% else %>
+    <i class="fas fa-heart"></i>
     <% end %>
       </p>
 <hr/>

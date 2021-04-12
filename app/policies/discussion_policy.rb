@@ -15,7 +15,7 @@ class DiscussionPolicy < ApplicationPolicy
 
   
   def destroy?
-    #@user.present? && @record.user == @user || @user.present? && @user.has_role?(:admin)
+    @user.present? && @record.user == @user || @user.present? && @user.has_role?(:admin)
   end
   
   
