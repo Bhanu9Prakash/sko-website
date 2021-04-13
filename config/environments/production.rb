@@ -4,7 +4,7 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
-  config.cache_classes = true
+  config.cache_classes = false
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
@@ -26,8 +26,6 @@ Rails.application.configure do
 
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
-  config.serve_static_assets = true
-  config.assets.digest = true
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.

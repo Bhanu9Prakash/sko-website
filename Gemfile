@@ -87,3 +87,4 @@ gem "pundit"
 #social media buttons
 gem 'shareable'
 
+gem 'rails_12factor', group: :production
