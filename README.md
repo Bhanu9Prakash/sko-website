@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Website made during Apr as a PoC for the NGO Project I was working on
 
-Things you may want to cover:
+Has user role based access and features.
 
-* Ruby version
+The below video is a walkthrough of the Website.
 
-* System dependencies
+I made it usjng Ruby on Rails and Bootstrap 
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+https://drive.google.com/file/d/1INtQWIv8mmv4hyLCl8eEP2NCmbX9v3MF/view?usp=drivesdk 
