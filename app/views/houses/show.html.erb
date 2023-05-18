@@ -1,0 +1,98 @@
+<br/>
+<br/>
+
+<% if notice %>
+      <%= render 'layouts/alerts' %>
+<% end %>
+
+<br/>
+<br/>
+
+<div class = "container">
+  
+  <div class = "row">
+    <div class = "col-md-6">
+      <p style = "font-size: 1.03rem;">
+        <strong>House number:</strong>
+        <%= @house.house_number %>
+      </p>
+      
+      <p style = "font-size: 1.03rem;">
+        <strong>Name of the head:</strong>
+        <%= @house.head %>
+      </p>
+      
+      <p style = "font-size: 1.03rem;">
+        <strong>Contact number:</strong>
+        <%= @house.contact_number %>
+      </p>
+      
+      <p style = "font-size: 1.03rem;">
+        <strong>Source of income:</strong>
+        <%= @house.source_of_income %>
+      </p>
+      
+      
+      
+        </div>
+    <div class = "col-md-6">
+      <p style = "font-size: 1.03rem;">
+        <strong>Number of people employed:</strong>
+        <%= @house.number_of_people_employed %>
+      </p>
+      <p style = "font-size: 1.03rem;" >
+        <strong>Living since:</strong>
+        <%= @house.living_since %>
+      </p>
+      
+      <p style = "font-size: 1.03rem;">
+        <strong>Average income:</strong>
+        <%= @house.average_income %>
+      </p>
+    </div>
+  </div>
+  
+  <p style = "font-size: 1.03rem;">
+    <strong>Members:</strong>
+  </p>
+  
+  <br/>
+  <table class = "table table-light">
+  <thead class = "thead-dark">
+    <tr>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Age</th>
+      <th>Relation With Head</th>
+      <th>Qualification</th>
+      </tr>
+  </thead>
+
+  <tbody>
+    <% @house.members.each do |member| %>
+      <tr>
+        <td><%= member.name %></td>
+        <td><%= member.gender %></td>
+        <td><%= member.age %></td>
+        <td><%= member.relation_with_head %></td>
+        <td><%= member.qualification %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+  <br/>
+  
+  
+  
+  <p style = "font-size: 1.03rem;">
+    <strong>Documents:</strong>
+    <%= @house.documents %>
+  </p>
+
+<hr/>
+
+<%= link_to 'Edit', edit_house_path(@house),class: "btn btn-sm btn-outline-secondary" %> |
+<%= link_to 'Back', houses_path,class: "btn btn-sm btn-outline-secondary" %>
+
+</div>

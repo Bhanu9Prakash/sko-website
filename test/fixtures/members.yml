@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  gender: MyString
+  age: 1
+  relation_with_head: MyString
+  qualification: MyString
+  house: one
+
+two:
+  name: MyString
+  gender: MyString
+  age: 1
+  relation_with_head: MyString
+  qualification: MyString
+  house: two

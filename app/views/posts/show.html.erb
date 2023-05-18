@@ -1,0 +1,60 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+<div class = "container"> 
+  <h1 class = "content-heading" style = "text-align: center;"><%= @post.title %></h1>
+
+  <p  style = "font-size: 1.2rem; text-align: left; ">
+      <%= @post.user.name %>  
+  </p>
+  
+<hr/>
+<p class = "content-text">
+  <%= @post.content %>
+</p>
+
+
+<br>
+<hr/>
+<p style = "font-size: 1.4rem;">
+    <%= @post.likes.count %>
+    <% if current_user%>
+      <% pre_like = @post.likes.find { |like| like.user_id == current_user.id} %>
+      <% if pre_like %>
+      <%= link_to post_like_path(@post, pre_like), method: :delete do %>
+        <i class="fas fa-heart"></i> 
+      <% end %>
+    <% else %>
+      <%= link_to post_likes_path(@post), method: :post do %>
+        <i class="far fa-heart"></i>
+      <% end %>
+    <% end %>
+    <% else %>
+    <i class="fas fa-heart"></i>
+    <% end %>
+      </p>
+<hr/>
+<h4>Comments</h4>
+
+<% if user_signed_in? %>
+  <%= render partial: "comments/form", locals: { comment: Comment.new, commentable: @post } %>
+<% else %>
+  <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "login", new_user_session_path %> to comment
+<% end %>
+<%= turbo_stream_from @post, :comments %>
+<%= tag.div id: "#{dom_id(@post)}_comments" do %>
+  <%= render partial: "comments/comment_with_replies", collection: @post.comments.where(parent_id: nil), as: :comment %>
+<% end %>
+<hr />
+
+<% if current_user == @post.user%>
+  <%= link_to 'Edit', edit_post_path(@post), class: "btn btn-sm btn-outline-secondary" %> | 
+<% end %>
+<%= link_to 'Back', posts_path, class: "btn btn-sm btn-outline-secondary" %>
+</div>
+<br/>
+<br/>

@@ -1,0 +1,45 @@
+<br/>
+<br/>
+
+<% if notice %>
+      <%= render 'layouts/alerts' %>
+<% end %>
+
+<br/>
+<br/>
+
+<div class = "container">
+  
+
+<h1 class = "display-4" style = "text-align:center;">Discussions</h1>
+<br>
+
+<div class="card">
+  <div class = "card-header">
+    <div class = "float-left">
+      <%= search_form_for @m do |f| %>
+  
+        <%= f.label :title_cont %>
+        <%= f.search_field :title_cont %>
+      
+        <%= f.submit %>
+      <% end %>
+    </div>
+    <%= link_to 'New Discussion', new_discussion_path, class: "float-right btn btn-outline-dark" %>
+  </div>
+  <% @discussions.each do |discussion| %>
+    <%= link_to discussion do %>
+    <div class="card-body">
+        <h5 class="float-left content-heading" style = "color:black;"><%= discussion.title %></h5>
+        <% if current_user == discussion.user %>
+          <div class = "float-right">
+            <%= link_to 'Edit', edit_discussion_path(discussion), class: "btn btn-sm btn-outline-secondary" %>
+            <%= link_to 'Destroy', discussion, class: "btn btn-sm btn-outline-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+          </div>
+        <% end %>
+    </div>
+    <% end %>
+    <hr/>
+  <% end %>
+  
+</div>

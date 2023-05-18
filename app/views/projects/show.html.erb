@@ -1,0 +1,51 @@
+<br/>
+<br/>
+
+<% if notice %>
+      <%= render 'layouts/alerts' %>
+<% end %>
+<br/>
+<br/>
+
+<div class = "container">
+  
+<div class="card">
+  <div class="card-body">
+    <h2 class='content-heading d-flex justify-content-between mb-4'>
+      <span><%= @project.name %></span>
+      <div>
+        <%= link_to 'Edit', edit_project_path(@project), class: 'btn btn-outline-secondary' %>
+        <%= link_to 'Destroy', @project, method: :delete, class: 'btn btn-outline-danger', data: { confirm: 'Are you sure?' } %>
+      </div>
+    </h2>
+    <p class = "content-text">
+      <%= @project.description %>
+    </p>
+    <h4 class = "content-heading">Tasks</h4>
+    <% @project.tasks.each do |task| %>
+      <% if task.persisted? %>
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <span class="badge badge-<%= task.badge_color %> mb-3"><%= task.status %></span>
+            </div>
+            
+            <p style = "font-size: 1.18rem"><%= task.description %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end%>
+
+  </div>
+</div>
+<br/>
+<br/>
+<% if current_user == @project.user %>
+  <%= link_to 'Edit', edit_project_path(@project), class: "btn btn-sm btn-outline-secondary" %> | 
+<% end %>
+
+<%= link_to 'Back', projects_path, class: "btn btn-sm btn-outline-secondary" %>
+</div>
+<br/>
+<br/>
+<br/>

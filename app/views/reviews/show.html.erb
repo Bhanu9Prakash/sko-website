@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<div class = "container">
+  <p>
+    <strong>Review type:</strong>
+    <%= @review.review_type %>
+  </p>
+  
+  <p>
+    <strong>Date:</strong>
+    <%= @review.date %>
+  </p>
+  
+  <p>
+    <strong>Volunteers present:</strong>
+    <%= @review.volunteers_present %>
+  </p>
+  
+  <p>
+    <strong>Description:</strong>
+    <%= @review.description %>
+  </p>
+  
+  
+  <%= link_to 'Edit', edit_review_path(@review) %> |
+  <%= link_to 'Back', reviews_path %>
+  
+</div>
+

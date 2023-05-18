@@ -1,0 +1,31 @@
+
+<%= simple_form_for(@kid) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :age %>
+    <%= f.input :current_standard %>
+    <%= f.input :school %>
+    <%= f.input :medium %>
+    <%= f.input :home_address %>
+    <%= f.input :mobile %>
+    <%= f.input :caste %>
+    <%= f.input :father_name %>
+    <%= f.input :father_occupation %>
+    <%= f.input :mother_name %>
+    <%= f.input :mother_occupation %>
+    <%= f.input :annual_income %>
+    <%= f.input :extra_curriculars %>
+    <%= f.input :personality_trait %>
+    <%= f.input :remarks %>
+    <%= f.input :additional_info, as: :rich_text_area %>
+    <%= f.association :house, label_method: :house_number, value_method: :id, include_blank: false %>
+  </div>
+  <br/>
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-dark" %>
+  </div>
+  <br/>
+<% end %>

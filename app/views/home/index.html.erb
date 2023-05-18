@@ -1,0 +1,40 @@
+
+
+
+
+
+<div class="container">
+    
+  <p class="short-description">WE FOSTER COMMUNITY DEVELOPMENT IN NATT BASTI,PILANI, RAJASTHAN
+WITH OUR MAIN FOCUS ON THE AREAS OF
+HEALTH, EDUCATION, WOMEN EMPOWERMENT AND MORE.</p>
+                 
+    <br>
+    <br>
+    
+  <div class="embed-responsive embed-responsive-16by9 " id="aboutProject" style="margin: 6rem 0rem;">
+    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/r7SiftAe2CE" allowfullscreen></iframe>
+  </div>
+
+</div>
+
+
+<% content_for :page_scripts do %>
+  <script>
+    $(document).ready(function() {
+    $(window).scroll(function() {
+      if($(this).scrollTop() > 200) { 
+      $('nav').addClass('bg-dark');
+      } 
+      else {
+        $('nav').removeClass('bg-dark');
+        }
+      });
+  });
+  </script>
+<% end %>
+
+
+
+
+
