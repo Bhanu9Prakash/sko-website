@@ -1,6 +1,6 @@
 # README
 
-Website made during Apr as a PoC for the NGO Project I was working on
+Website made during Apr 2021 as a PoC for the NGO Project I was a part of.
 
 Has user role based access and features. Includes pages for user role management as well
 
